@@ -1,0 +1,22 @@
+[
+  {
+    "item": [
+      {
+        "id": "m2",
+        "name": "Margherita Pizza",
+        "price": "12.99",
+        "description": "A classic pizza with fresh mozzarella, tomatoes, and basil on a thin and crispy crust.",
+        "image": "images/margherita-pizza.jpg",
+        "quantity": 4
+      }
+    ],
+    "customer": {
+      "name": "yosef palas",
+      "email": "yosefpalas@gmail.com",
+      "street": "mizhpe",
+      "postal-code": "11111",
+      "city": "haifh"
+    },
+    "id": "247.22877847717163"
+  }
+]
