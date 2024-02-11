@@ -1,22 +1,18 @@
-import React, { useContext } from "react";
 import Modal from "./UI/Modal";
-import CartContext from "../store/CartContext";
 import currencyFormatter from "../Util/formatting";
 import Input from "./UI/Input";
 import Button from "./UI/button";
-import UserProgressContext from "../store/UseProgressContext";
+import { userProgressActions } from "../store/UseProgressContext";
+import { cartActions } from "../store/CartContext";
+import { useSelector, useDispatch } from "react-redux";
 
 function CheckOut() {
-  const cartCtx = useContext(CartContext);
-  const userProgressCtx = useContext(UserProgressContext);
-
-  const cartTotal = cartCtx.items.reduce(
-    (totalPrice, item) => totalPrice + item.quantity * item.price,
-    0
-  );
+  const dispatch = useDispatch();
+  const progressCheckout = useSelector((state) => state.userProgress.progress);
+  const cartItems = useSelector((state) => state.cart.items);
 
   function handleClose() {
-    userProgressCtx.HideCheckOut();
+    dispatch(userProgressActions.HideCheckOut());
   }
 
   function handleSubmit(event) {
@@ -29,7 +25,7 @@ function CheckOut() {
       method: "POST",
       body: JSON.stringify({
         order: {
-          item: cartCtx.items,
+          item: cartItems,
           customer: customerData,
         },
       }),
@@ -38,15 +34,18 @@ function CheckOut() {
       },
     });
 
-    userProgressCtx.HideCheckOut();
-    cartCtx.clearItem();
+    dispatch(userProgressActions.HideCheckOut());
+    dispatch(cartActions.clearItem());
   }
 
   return (
-    <Modal open={userProgressCtx.progress === "checkout"}>
+    <Modal open={progressCheckout === "checkout"}>
       <form onSubmit={handleSubmit}>
         <h2>Checkout</h2>
-        <p>Total Amount: {currencyFormatter.format(cartTotal)} </p>
+        <p>
+          Total Amount:
+          {currencyFormatter.format(cartItems.quantity * cartItems.price)}
+        </p>
 
         <Input label="Full Name" type="text" id="name" />
         <Input label="E-Mail Address" type="email" id="email" />

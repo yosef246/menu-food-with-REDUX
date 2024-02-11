@@ -1,7 +1,20 @@
 import React from "react";
 import currencyFormatter from "../Util/formatting";
+import { useDispatch } from "react-redux";
+import { cartActions } from "../store/CartContext";
 
-function CartItem({ name, quantity, price, onIncrease, onDecrease }) {
+function CartItem(props) {
+  const dispatch = useDispatch();
+  const { id, name, quantity, price } = props.item;
+
+  function onDecrease() {
+    dispatch(cartActions.removeItem(id));
+  }
+
+  function onIncrease() {
+    dispatch(cartActions.addItem({ id, name, price }));
+  }
+
   return (
     <li className="cart-item">
       <p>

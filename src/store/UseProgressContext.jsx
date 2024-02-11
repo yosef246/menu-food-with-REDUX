@@ -1,42 +1,26 @@
-import { createContext, useReducer, useState } from "react";
+import { createSlice } from "@reduxjs/toolkit";
 
-const UserProgressContext = createContext({
-  progress: "",
-  showCart: () => {},
-  HideCart: () => {},
-  showCheckOut: () => {},
-  HideCheckOut: () => {},
+const UserProgressSlice = createSlice({
+  name: "userProgress",
+  initialState: {
+    progress: "",
+  },
+  reducers: {
+    showCart(state) {
+      state.progress = "cart";
+    },
+    HideCart(state) {
+      state.progress = "";
+    },
+    showCheckOut(state) {
+      state.progress = "checkout";
+    },
+    HideCheckOut(state) {
+      state.progress = "";
+    },
+  },
 });
 
-export function UserProgressContextProvider({ children }) {
-  const [userProgress, setUserProgress] = useState("");
+export const userProgressActions = UserProgressSlice.actions;
 
-  function showCart() {
-    setUserProgress("cart");
-  }
-  function HideCart() {
-    setUserProgress("");
-  }
-  function showCheckOut() {
-    setUserProgress("checkout");
-  }
-  function HideCheckOut() {
-    setUserProgress("");
-  }
-
-  const userProgressCtx = {
-    progress: userProgress,
-    showCart,
-    HideCart,
-    showCheckOut,
-    HideCheckOut,
-  };
-
-  return (
-    <UserProgressContext.Provider value={userProgressCtx}>
-      {children}
-    </UserProgressContext.Provider>
-  );
-}
-
-export default UserProgressContext;
+export default UserProgressSlice;

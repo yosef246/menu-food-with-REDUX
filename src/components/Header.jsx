@@ -1,20 +1,14 @@
-import React, { useContext } from "react";
 import logoImg from "../assets/logo.jpg";
 import Button from "./UI/button";
-import CartContext from "../store/CartContext";
-import UserProgressContext from "../store/UseProgressContext";
+import { useSelector, useDispatch } from "react-redux";
+import { userProgressActions } from "../store/UseProgressContext";
 
 export default function Header() {
-  const cartCtx = useContext(CartContext);
-  const userProgressCtx = useContext(UserProgressContext);
-
-  const totalCartItems = cartCtx.items.reduce((totalNumberOfItems, item) => {
-    //פה אני רואה את הכמות של הפריטים הנבחרים ע"י שאני קורא לרשימה ולכמות פריטים שבה
-    return totalNumberOfItems + item.quantity;
-  }, 0);
+  const dispatch = useDispatch();
+  const totalQuantity = useSelector((state) => state.cart.totalQuantity);
 
   function handleShowCart() {
-    userProgressCtx.showCart();
+    dispatch(userProgressActions.showCart());
   }
 
   return (
@@ -25,7 +19,7 @@ export default function Header() {
       </div>
       <nav>
         <Button textOnly onClick={handleShowCart}>
-          Cart ({totalCartItems})
+          Cart ({totalQuantity})
         </Button>
       </nav>
     </header>

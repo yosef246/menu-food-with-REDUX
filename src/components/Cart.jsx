@@ -1,40 +1,43 @@
-import React, { useContext } from "react";
+import React from "react";
 import Modal from "./UI/Modal";
-import CartContext from "../store/CartContext";
 import currencyFormatter from "../Util/formatting";
 import Button from "./UI/button";
-import UserProgressContext from "../store/UseProgressContext";
+import { userProgressActions } from "../store/UseProgressContext";
 import CartItem from "./CartItem";
+import { useDispatch, useSelector } from "react-redux";
 
 function Cart() {
-  const cartCtx = useContext(CartContext);
-  const userProgressCtx = useContext(UserProgressContext);
+  const dispatch = useDispatch();
 
-  const cartTotal = cartCtx.items.reduce(
+  const cartItems = useSelector((state) => state.cart.items);
+  const progressCart = useSelector((state) => state.userProgress.progress);
+
+  const cartTotal = cartItems.reduce(
     (totalPrice, item) => totalPrice + item.quantity * item.price,
     0
   );
 
   function handleCloseCart() {
-    userProgressCtx.HideCart();
+    dispatch(userProgressActions.HideCart());
   }
 
   function handleGoToCheckout() {
-    userProgressCtx.showCheckOut();
+    dispatch(userProgressActions.showCheckOut());
   }
 
   return (
-    <Modal className="cart" open={userProgressCtx.progress === "cart"}>
+    <Modal className="cart" open={progressCart === "cart"}>
       <h2>Your Cart</h2>
       <ul>
-        {cartCtx.items.map((item) => (
+        {cartItems.map((item) => (
           <CartItem
-            key={item.id}
-            name={item.name}
-            quantity={item.quantity}
-            price={item.price}
-            onIncrease={() => cartCtx.addItem(item)}
-            onDecrease={() => cartCtx.removeItem(item.id)}
+            id={item.id}
+            item={{
+              id: item.id,
+              name: item.name,
+              quantity: item.quantity,
+              price: item.price,
+            }}
           />
         ))}
       </ul>
@@ -43,7 +46,7 @@ function Cart() {
         <Button textOnly onClick={handleCloseCart}>
           Close
         </Button>
-        {cartCtx.items.length > 0 && (
+        {cartItems.length > 0 && (
           <Button onClick={handleGoToCheckout}>Go To CheckOut</Button>
         )}
       </p>
