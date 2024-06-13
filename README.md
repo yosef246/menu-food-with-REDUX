@@ -1,7 +1,6 @@
-### hi there
 
-I'm Joseph, I'm a website developer, I enjoy creating websites of all kinds, and I enjoy learning languages ​​like React and all kinds of other languages,
-and I use my self-learning ability to expand my knowledge and gain more experience
+
+The project talks about a menu of food orders that can be ordered, added and downloaded as needed and at the end there is an option to order to the customer's home
 
 
 <h1 align="center">Hi 👋, I'm yosef palas</h1>
