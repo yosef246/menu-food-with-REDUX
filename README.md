@@ -3,14 +3,11 @@
 I'm Joseph, I'm a website developer, I enjoy creating websites of all kinds, and I enjoy learning languages ​​like React and all kinds of other languages,
 and I use my self-learning ability to expand my knowledge and gain more experience
 
+
 <h1 align="center">Hi 👋, I'm yosef palas</h1>
-<h3 align="center">A passionate frontend developer</h3>
+<h3 align="center">i am fullstack developer</h3>
 
 - 👨‍💻 All of my projects are available at [https://github.com/yosef246](https://github.com/yosef246)
-
-- 💬 Ask me about **react, javascript, html5, css**
-
-- 📫 How to reach me **yosefpalas@gmail.com**
 
 <h3 align="left">Connect with me:</h3>
 <p align="left">
