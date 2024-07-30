@@ -2,7 +2,7 @@ import currencyFormatter from "../Util/formatting";
 import Button from "./UI/button";
 import { cartActions } from "../store/CartContext";
 import { useDispatch } from "react-redux";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 
 function MealItem(props) {
   const dispatch = useDispatch();
