@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 function Button({ children, textOnly, className, ...props }) {
   const cssClasses = textOnly
@@ -6,9 +7,14 @@ function Button({ children, textOnly, className, ...props }) {
     : `button ${className}`;
 
   return (
-    <button className={cssClasses} {...props}>
+    <motion.button
+      whileHover={{ scale: 1.1 }}
+      transition={{ type: "spring", stiffness: 300 }}
+      className={cssClasses}
+      {...props}
+    >
       {children}
-    </button>
+    </motion.button>
   );
 }
 export default Button;

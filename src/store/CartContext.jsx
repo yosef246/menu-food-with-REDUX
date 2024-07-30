@@ -30,6 +30,7 @@ const CartSlice = createSlice({
       const existingCartItemIndex = state.items.findIndex(
         (item) => item.id === id
       );
+
       state.totalQuantity--;
 
       const existingCartItem = state.items[existingCartItemIndex];

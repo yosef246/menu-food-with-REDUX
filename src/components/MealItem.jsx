@@ -2,6 +2,7 @@ import currencyFormatter from "../Util/formatting";
 import Button from "./UI/button";
 import { cartActions } from "../store/CartContext";
 import { useDispatch } from "react-redux";
+import { AnimatePresence, motion } from "framer-motion";
 
 function MealItem(props) {
   const dispatch = useDispatch();
@@ -13,7 +14,11 @@ function MealItem(props) {
   }
 
   return (
-    <li className="meal-item">
+    <motion.li
+      whileHover={{ scale: 0.9 }}
+      transition={{ type: "spring", stiffness: 200 }}
+      className="meal-item"
+    >
       <article>
         <img src={`http://localhost:3000/${image}`} alt={name} />
         <div>
@@ -25,7 +30,7 @@ function MealItem(props) {
           <Button onClick={handleAddmealToCart}>Add to Cart</Button>
         </p>
       </article>
-    </li>
+    </motion.li>
   );
 }
 export default MealItem;
